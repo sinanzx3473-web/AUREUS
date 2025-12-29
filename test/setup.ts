@@ -1,38 +1,42 @@
-import { jest } from '@jest/globals';
+import '@testing-library/jest-dom';
+import { cleanup } from '@testing-library/react';
+import { afterEach, vi } from 'vitest';
 
-// Mock Redis to prevent connection attempts during tests
-jest.mock('../src/config/redis', () => ({
-  redis: {
-    get: jest.fn(),
-    set: jest.fn(),
-    del: jest.fn(),
-    incr: jest.fn(),
-    expire: jest.fn(),
-    ttl: jest.fn(),
-    exists: jest.fn(),
-    on: jest.fn(),
-    quit: jest.fn(),
-  },
-}));
+// Cleanup after each test
+afterEach(() => {
+  cleanup();
+});
 
-// Mock logger to reduce noise in test output
-jest.mock('../src/utils/logger', () => ({
-  logger: {
-    info: jest.fn(),
-    error: jest.fn(),
-    warn: jest.fn(),
-    debug: jest.fn(),
-  },
-}));
+// Mock window.matchMedia
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
 
-// Set test environment variables
-process.env.NODE_ENV = 'test';
-process.env.JWT_SECRET = 'test-jwt-secret-key-for-testing-only';
-process.env.CSRF_SECRET = 'test-csrf-secret-key-for-testing-only';
-process.env.DATABASE_URL = process.env.DATABASE_URL || 'postgresql://test:test@localhost:5432/test';
-process.env.REDIS_URL = 'redis://localhost:6379';
-process.env.FRONTEND_URL = 'http://localhost:3000';
-process.env.BACKEND_URL = 'http://localhost:4000';
+// Mock IntersectionObserver
+global.IntersectionObserver = class IntersectionObserver {
+  constructor() {}
+  disconnect() {}
+  observe() {}
+  takeRecords() {
+    return [];
+  }
+  unobserve() {}
+} as any;
 
-// Increase test timeout for integration tests
-jest.setTimeout(30000);
+// Mock ResizeObserver
+global.ResizeObserver = class ResizeObserver {
+  constructor() {}
+  disconnect() {}
+  observe() {}
+  unobserve() {}
+} as any;

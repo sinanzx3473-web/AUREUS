@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Neopixel';
+  src: url('/fonts/NEOPIXEL-Regular[1].woff2') format('woff2'),
+       url('/fonts/NEOPIXEL-Regular[1].woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+/* Marquee Animation for Live Ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* FORCE BLACK BACKGROUND */
+html, body, #root {
+  background-color: #050505 !important; /* Void Black */
+  color: #F2F2F0; /* Alabaster */
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Cyber Grid Background */
+.bg-grid {
+  background-size: 50px 50px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+/* Gold Gradient Text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #F2F2F0 0%, #D4AF37 50%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.3));
+}
+
+/* Stealth Skip Link - Hidden until focused */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  z-index: 9999;
+  top: 1rem;
+  left: 1rem;
+  background-color: #D4AF37; /* Gold */
+  color: #050505; /* Black */
+  border-radius: 0.25rem;
+  outline: 4px solid rgba(212, 175, 55, 0.5);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 2%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 2%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 45 65% 52%;
+    --primary-foreground: 0 0% 2%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 45 65% 52%;
+    --accent-foreground: 0 0% 2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 45 65% 52%;
+    --radius: 0rem;
+    --chart-1: 45 65% 52%;
+    --chart-2: 0 0% 60%;
+    --chart-3: 0 0% 40%;
+    --chart-4: 0 0% 20%;
+    --chart-5: 0 0% 10%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', 'Space Grotesk', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* RainbowKit Custom Styling - AUREUS Theme */
+[data-rk] {
+  --rk-colors-modalBackground: #050505 !important;
+  --rk-colors-modalBorder: rgba(212, 175, 55, 0.2) !important;
+  --rk-colors-modalText: #F2F2F0 !important;
+  --rk-colors-modalTextSecondary: rgba(242, 242, 240, 0.6) !important;
+  --rk-colors-accentColor: #D4AF37 !important;
+  --rk-colors-accentColorForeground: #050505 !important;
+  --rk-colors-connectButtonBackground: #D4AF37 !important;
+  --rk-colors-connectButtonText: #050505 !important;
+  --rk-fonts-body: 'JetBrains Mono', monospace !important;
+  --rk-radii-modal: 0px !important;
+  --rk-radii-actionButton: 0px !important;
+  --rk-radii-connectButton: 0px !important;
+}
+
+/* RainbowKit Connect Button Override */
+button[data-testid="rk-connect-button"] {
+  background: #D4AF37 !important;
+  color: #050505 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  border: 2px solid #D4AF37 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important;
+}
+
+button[data-testid="rk-connect-button"]:hover {
+  background: transparent !important;
+  color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* RainbowKit Modal Styling */
+[data-rk] [role="dialog"] {
+  background: #050505 !important;
+  border: 2px solid rgba(212, 175, 55, 0.3) !important;
+  border-radius: 0 !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+/* RainbowKit Wallet Options */
+[data-rk] button[data-testid*="wallet-option"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  border-radius: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-rk] button[data-testid*="wallet-option"]:hover {
+  background: rgba(212, 175, 55, 0.1) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* RainbowKit Account Button */
+[data-rk] button[aria-label*="Account"] {
+  background: rgba(212, 175, 55, 0.1) !important;
+  border: 2px solid rgba(212, 175, 55, 0.3) !important;
+  border-radius: 0 !important;
+  color: #D4AF37 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+[data-rk] button[aria-label*="Account"]:hover {
+  background: rgba(212, 175, 55, 0.2) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+  border-left: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.5);
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #F2F2F0;
+}
+
+::-moz-selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #F2F2F0;
+}
+
+/* Focus Visible Styling */
+*:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+body {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Loading State */
+body.loading {
+  opacity: 0;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* NUCLEAR OPTION: Hide all skip links */
+a[href*="main"], a[href*="content"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
