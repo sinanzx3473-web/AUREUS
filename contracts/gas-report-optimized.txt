@@ -1,0 +1,553 @@
+No files changed, compilation skipped
+
+Ran 11 tests for test/SkillProfile.pagination.t.sol:SkillProfilePaginationTest
+[PASS] testBasicSkillsPagination() (gas: 1493016)
+[PASS] testCountHelpers() (gas: 2765191)
+[PASS] testEducationPagination() (gas: 2886724)
+[PASS] testExperiencePagination() (gas: 3925067)
+[PASS] testLargeDatasetPagination() (gas: 14503283)
+[PASS] testLimitExceedsRemaining() (gas: 791964)
+[PASS] testMaxSkillsPerUser() (gas: 14497632)
+[PASS] testMultipleUsersPaginationIsolation() (gas: 2234916)
+[PASS] testOffsetBeyondTotal() (gas: 687417)
+[PASS] testPaginationAfterRemovals() (gas: 1514693)
+[PASS] testPaginationWithZeroItems() (gas: 11064)
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 44.84ms (43.40ms CPU time)
+
+Ran 38 tests for test/Endorsement.t.sol:EndorsementTest
+[PASS] testAccessControlForPause() (gas: 145964)
+[PASS] testCannotEndorseSameSkillTwice() (gas: 286366)
+[PASS] testCannotEndorseSelf() (gas: 41452)
+[PASS] testCannotEndorseWithEmptySkillName() (gas: 45368)
+[PASS] testCannotEndorseZeroAddress() (gas: 41277)
+[PASS] testCannotGiveReferenceToSamePersonTwice() (gas: 309125)
+[PASS] testCannotReferenceSelf() (gas: 42210)
+[PASS] testCannotReferenceWithEmptyRelationship() (gas: 48502)
+[PASS] testCannotReferenceZeroAddress() (gas: 42133)
+[PASS] testCannotRevokeAlreadyRevokedEndorsement() (gas: 338994)
+[PASS] testCannotRevokeAlreadyRevokedReference() (gas: 358730)
+[PASS] testCannotRevokeOthersEndorsement() (gas: 283875)
+[PASS] testCannotRevokeOthersReference() (gas: 306122)
+[PASS] testCompleteReferenceLifecycle() (gas: 378129)
+[PASS] testCreateEndorsement() (gas: 286724)
+[PASS] testCreateReference() (gas: 311942)
+[PASS] testEndorsementFromMultipleUsers() (gas: 504873)
+[PASS] testFuzzMultipleEndorsements(uint8) (runs: 1000, μ: 4167466, ~: 2691380)
+[FAIL: Batch endorsements inefficient] testGasBatchEndorsements() (gas: 1170424)
+[PASS] testGasCreateEndorsement() (gas: 249673)
+[FAIL: Create reference uses too much gas] testGasCreateReference() (gas: 275545)
+[PASS] testGasRevokeEndorsement() (gas: 302508)
+[PASS] testGetActiveEndorsements() (gas: 562744)
+[PASS] testGetActiveReferences() (gas: 604837)
+[PASS] testGetActiveReferencesFiltering() (gas: 623092)
+[PASS] testGetGivenEndorsements() (gas: 504651)
+[PASS] testGetReceivedEndorsements() (gas: 504761)
+[PASS] testGetReceivedReferences() (gas: 549303)
+[PASS] testMaxEndorsementsPerUser() (gas: 117536872)
+[PASS] testMaxReferencesPerUser() (gas: 27400115)
+[PASS] testMultipleSkillEndorsements() (gas: 730679)
+[PASS] testOnlyAdminCanPause() (gas: 84609)
+[PASS] testPausePreventsFunctions() (gas: 88348)
+[PASS] testReentrancyProtection() (gas: 509779)
+[PASS] testRevokeAndCheckActive() (gas: 586359)
+[PASS] testRevokeEndorsement() (gas: 324564)
+[PASS] testRevokeReference() (gas: 347925)
+[PASS] testStringLengthValidation() (gas: 129331)
+Suite result: FAILED. 36 passed; 2 failed; 0 skipped; finished in 2.54s (2.54s CPU time)
+
+Ran 10 tests for test/Integration.t.sol:IntegrationTest
+[PASS] testBatchOperations() (gas: 3130871)
+[PASS] testClaimDisputeWorkflow() (gas: 843374)
+[PASS] testCompleteUserJourney() (gas: 2228713)
+[PASS] testEvidenceUpdateWorkflow() (gas: 701062)
+[PASS] testMultiUserInteraction() (gas: 1801548)
+[PASS] testProfileWithVerifiedSkillsAndEndorsements() (gas: 1835589)
+[PASS] testReferenceAndEndorsementCombination() (gas: 1170913)
+[PASS] testSystemWidePause() (gas: 331153)
+[PASS] testVerifierReputationTracking() (gas: 1974310)
+[PASS] testVerifierSuspensionImpact() (gas: 682347)
+Suite result: ok. 10 passed; 0 failed; 0 skipped; finished in 31.06ms (25.08ms CPU time)
+
+Ran 40 tests for test/SkillProfile.t.sol:SkillProfileTest
+[PASS] testAccessControlEnforcement() (gas: 296546)
+[PASS] testAddEducation() (gas: 420241)
+[PASS] testAddExperience() (gas: 417807)
+[PASS] testAddSkill() (gas: 368246)
+[PASS] testCannotAddExperienceWithInvalidDates() (gas: 270821)
+[PASS] testCannotAddSkillWithInvalidProficiency() (gas: 268799)
+[PASS] testCannotAddSkillWithoutProfile() (gas: 43560)
+[PASS] testCannotCreateProfileTwice() (gas: 230371)
+[PASS] testCannotCreateProfileWithEmptyName() (gas: 44060)
+[PASS] testCannotRemoveInvalidEducationIndex() (gas: 230040)
+[PASS] testCannotRemoveInvalidExperienceIndex() (gas: 230172)
+[PASS] testCannotRemoveInvalidSkillIndex() (gas: 230054)
+[PASS] testCannotUpdateNonExistentProfile() (gas: 44208)
+[PASS] testCannotVerifyAlreadyVerifiedSkill() (gas: 434467)
+[PASS] testCannotVerifyInvalidSkillIndex() (gas: 230032)
+[PASS] testCreateProfile() (gas: 228672)
+[PASS] testFuzzAddSkillProficiency(uint8) (runs: 1000, μ: 364659, ~: 364404)
+[PASS] testFuzzMultipleProfiles(uint8) (runs: 1000, μ: 2762754, ~: 1892068)
+[PASS] testGasAddSkill() (gas: 341383)
+[PASS] testGasBatchSkillAddition() (gas: 854082)
+[PASS] testGasCreateProfile() (gas: 195850)
+[PASS] testGettersReturnCorrectData() (gas: 795780)
+[PASS] testMaxEducationPerUser() (gas: 3787667)
+[PASS] testMaxExperiencePerUser() (gas: 8027013)
+[PASS] testMaxSkillsPerUser() (gas: 13747576)
+[PASS] testMultipleSkillsAndVerifications() (gas: 761801)
+[PASS] testOnlyAdminCanPause() (gas: 84523)
+[PASS] testOnlyAdminCanUnpause() (gas: 105888)
+[PASS] testOnlyVerifierCanVerifySkill() (gas: 371196)
+[PASS] testPausePreventsFunctions() (gas: 86990)
+[PASS] testPauseSecurityMechanism() (gas: 86792)
+[PASS] testReentrancyProtection() (gas: 341217)
+[PASS] testRemoveEducation() (gas: 646563)
+[PASS] testRemoveExperience() (gas: 620983)
+[PASS] testRemoveSkill() (gas: 540792)
+[PASS] testStringLengthValidation() (gas: 273151)
+[PASS] testTimestampValidation() (gas: 271386)
+[PASS] testUnpauseRestoresFunctions() (gas: 267157)
+[PASS] testUpdateProfile() (gas: 271781)
+[PASS] testVerifySkill() (gas: 422024)
+Suite result: ok. 40 passed; 0 failed; 0 skipped; finished in 2.60s (2.60s CPU time)
+
+Ran 9 tests for test/TakumiTimelock.t.sol:TakumiTimelockTest
+[PASS] testBatchOperations() (gas: 192252)
+[PASS] testCancelOperation() (gas: 145272)
+[PASS] testCannotExecuteBeforeDelay() (gas: 127674)
+[PASS] testCannotScheduleWithoutProposerRole() (gas: 39240)
+[PASS] testMinDelayEnforcement() (gas: 5589)
+[PASS] testMultiSigWorkflow() (gas: 143533)
+[PASS] testScheduleAndExecutePause() (gas: 214459)
+[PASS] testScheduleAndExecuteRoleGrant() (gas: 141021)
+[PASS] testTimelockDeployment() (gas: 25569)
+Suite result: ok. 9 passed; 0 failed; 0 skipped; finished in 26.47ms (24.54ms CPU time)
+
+Ran 11 tests for test/SkillClaim.pagination.t.sol:SkillClaimPaginationTest
+[PASS] testBasicUserClaimsPagination() (gas: 4150062)
+[PASS] testClaimsByStatusMixed() (gas: 14292453)
+[PASS] testClaimsByStatusPaginationLarge() (gas: 65132993)
+[PASS] testCountHelpers() (gas: 3702763)
+[PASS] testLimitExceedsRemaining() (gas: 1481974)
+[PASS] testMaxClaimsPerUser() (gas: 41169516)
+[PASS] testMultipleUsersPaginationIsolation() (gas: 4788074)
+[PASS] testOffsetBeyondTotal() (gas: 1051667)
+[PASS] testPaginationWithStatusChanges() (gas: 5810002)
+[PASS] testPaginationWithZeroClaims() (gas: 11011)
+[PASS] testVerifierClaimsPagination() (gas: 8743799)
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 274.94ms (273.89ms CPU time)
+
+Ran 13 tests for test/TemporaryDeployFactory.t.sol:TemporaryDeployFactoryTest
+[PASS] testCannotRevokeFactoryTwice() (gas: 12575825)
+[PASS] testDeployedContractsFunctional() (gas: 12756128)
+[FAIL: Deployment uses too much gas] testDeploymentGas() (gas: 12520568)
+[PASS] testDeploymentSuccess() (gas: 12587811)
+[PASS] testEventEmission() (gas: 12525321)
+[PASS] testFactoryPause() (gas: 12581931)
+[PASS] testFactoryRemainsActive() (gas: 12523234)
+[PASS] testFactoryRevocation() (gas: 12593236)
+[PASS] testFuzzDeployerAddress(address) (runs: 1000, μ: 12543992, ~: 12543992)
+[PASS] testGetDeployedContracts() (gas: 12541446)
+[PASS] testOnlyOwnerCanPause() (gas: 12544288)
+[PASS] testOnlyOwnerCanRevoke() (gas: 12544286)
+[PASS] testOnlyOwnerCanUnpause() (gas: 12572363)
+Suite result: FAILED. 12 passed; 1 failed; 0 skipped; finished in 1.98s (1.98s CPU time)
+
+Ran 37 tests for test/SkillClaim.t.sol:SkillClaimTest
+[PASS] testAccessControlForAdminFunctions() (gas: 282834)
+[PASS] testApproveClaim() (gas: 431701)
+[PASS] testAssignClaim() (gas: 344302)
+[PASS] testCannotApproveNonPendingClaim() (gas: 429882)
+[PASS] testCannotApproveWithoutAssignment() (gas: 260480)
+[PASS] testCannotAssignAlreadyAssignedClaim() (gas: 349653)
+[PASS] testCannotAssignInvalidClaim() (gas: 41358)
+[PASS] testCannotAssignToNonVerifier() (gas: 262302)
+[PASS] testCannotCreateClaimWithEmptySkillName() (gas: 43835)
+[PASS] testCannotCreateClaimWithoutEvidence() (gas: 43773)
+[PASS] testCannotDisputeApprovedClaim() (gas: 463548)
+[PASS] testCannotDisputePendingClaim() (gas: 263430)
+[PASS] testCannotRejectWithoutAssignment() (gas: 260556)
+[PASS] testCannotRejectWithoutReason() (gas: 343138)
+[PASS] testCannotUpdateEvidenceForNonPendingClaim() (gas: 434525)
+[PASS] testCompleteClaimLifecycle() (gas: 563412)
+[PASS] testCreateClaim() (gas: 267353)
+[PASS] testDisputeClaim() (gas: 468397)
+[PASS] testFuzzCreateMultipleClaims(uint8) (runs: 1000, μ: 3089723, ~: 1850253)
+[PASS] testGasApproveClaim() (gas: 397147)
+[PASS] testGasBatchClaimProcessing() (gas: 1463250)
+[FAIL: Create claim uses too much gas] testGasCreateClaim() (gas: 229505)
+[PASS] testGetClaimsByStatus() (gas: 846352)
+[PASS] testGetClaimsByStatusFiltering() (gas: 1030392)
+[PASS] testGetUserClaims() (gas: 437005)
+[PASS] testGetVerifierClaims() (gas: 628949)
+[PASS] testMaxClaimsPerUser() (gas: 41734125)
+[PASS] testOnlyAdminCanAssignClaim() (gas: 257777)
+[PASS] testOnlyAssignedVerifierCanApprove() (gas: 347553)
+[PASS] testOnlyClaimantCanDispute() (gas: 435425)
+[PASS] testOnlyVerifierCanApproveClaim() (gas: 343140)
+[PASS] testPauseBlocksAllFunctions() (gas: 115020)
+[PASS] testReentrancyProtection() (gas: 396791)
+[PASS] testRejectClaim() (gas: 433676)
+[PASS] testStringLengthValidation() (gas: 123033)
+[PASS] testUpdateEvidence() (gas: 300938)
+[PASS] testVerifierRoleEnforcement() (gas: 371401)
+Suite result: FAILED. 36 passed; 1 failed; 0 skipped; finished in 2.77s (2.75s CPU time)
+
+Ran 40 tests for test/VerifierRegistry.t.sol:VerifierRegistryTest
+[PASS] testAccessControlEnforcement() (gas: 527831)
+[PASS] testAddSpecialization() (gas: 454848)
+[PASS] testCannotAddDuplicateSpecialization() (gas: 408400)
+[PASS] testCannotAddSpecializationToNonExistent() (gas: 42051)
+[PASS] testCannotChangeStatusOfNonExistent() (gas: 41532)
+[PASS] testCannotChangeToSameStatus() (gas: 404971)
+[PASS] testCannotRecordVerificationForNonExistent() (gas: 41797)
+[PASS] testCannotRegisterVerifierTwice() (gas: 406432)
+[PASS] testCannotRegisterWithEmptyName() (gas: 45518)
+[PASS] testCannotRegisterWithEmptyOrganization() (gas: 355358)
+[PASS] testCannotRegisterWithoutSpecializations() (gas: 44797)
+[PASS] testCannotRemoveLastSpecialization() (gas: 404926)
+[PASS] testCannotRemoveSpecializationFromNonExistent() (gas: 41498)
+[PASS] testCannotUpdateNonExistentVerifier() (gas: 43850)
+[PASS] testChangeVerifierStatus() (gas: 452364)
+[PASS] testCompleteVerifierLifecycle() (gas: 834626)
+[PASS] testDisputedVerificationsTracking() (gas: 650477)
+[PASS] testFuzzApprovalRate(uint8,uint8) (runs: 1000, μ: 3051427, ~: 2845500)
+[PASS] testFuzzRegisterMultipleVerifiers(uint8) (runs: 1000, μ: 5380365, ~: 3970447)
+[FAIL: Batch registration inefficient] testGasBatchVerifierRegistration() (gas: 1676421)
+[PASS] testGasRecordVerification() (gas: 450960)
+[FAIL: Register verifier uses too much gas] testGasRegisterVerifier() (gas: 398198)
+[PASS] testGetActiveVerifiers() (gas: 756938)
+[PASS] testGetApprovalRate() (gas: 589578)
+[PASS] testGetApprovalRateEdgeCases() (gas: 1062548)
+[PASS] testMaxSpecializationsOnRegistration() (gas: 158432)
+[PASS] testMaxSpecializationsPerVerifier() (gas: 7346554)
+[PASS] testMultipleSpecializationsManagement() (gas: 508879)
+[PASS] testOnlyAdminCanChangeStatus() (gas: 402380)
+[PASS] testOnlyAdminCanRegisterVerifier() (gas: 43411)
+[PASS] testOnlyAdminCanUpdateVerifier() (gas: 404726)
+[PASS] testPauseBlocksAllFunctions() (gas: 89141)
+[PASS] testRecordVerification() (gas: 487294)
+[PASS] testRecordVerificationUpdatesStats() (gas: 607137)
+[PASS] testReentrancyProtection() (gas: 450777)
+[PASS] testRegisterVerifier() (gas: 461871)
+[PASS] testRemoveSpecialization() (gas: 452491)
+[PASS] testStatusChangeUpdatesActiveCount() (gas: 831226)
+[PASS] testStringLengthValidation() (gas: 124386)
+[PASS] testUpdateVerifier() (gas: 471164)
+Suite result: FAILED. 38 passed; 2 failed; 0 skipped; finished in 6.11s (6.23s CPU time)
+
+╭------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/Endorsement.sol:Endorsement Contract |                 |        |        |        |         |
++=================================================================================================+
+| Deployment Cost                          | Deployment Size |        |        |        |         |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| 2725398                                  | 12459           |        |        |        |         |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                          |                 |        |        |        |         |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                            | Min             | Avg    | Median | Max    | # Calls |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| ADMIN_ROLE                               | 312             | 312    | 312    | 312    | 1       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_ENDORSEMENTS_PER_USER                | 327             | 327    | 327    | 327    | 501     |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_REFERENCES_PER_USER                  | 238             | 238    | 238    | 238    | 102     |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| createEndorsement                        | 25230           | 242580 | 245117 | 262409 | 4775    |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| createReference                          | 31163           | 253575 | 267489 | 267489 | 123     |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getActiveEndorsements                    | 13394           | 13484  | 13394  | 13664  | 3       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getActiveReferences                      | 13435           | 13435  | 13435  | 13435  | 2       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getEndorsement                           | 17639           | 17639  | 17639  | 17639  | 2       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getGivenEndorsements                     | 5756            | 7300   | 5756   | 10904  | 5       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getReceivedEndorsements                  | 5735            | 7536   | 7022   | 10883  | 10      |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getReceivedReferences                    | 5712            | 7428   | 8286   | 8286   | 3       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| getReference                             | 20642           | 20642  | 20642  | 20642  | 4       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| hasRole                                  | 2693            | 2693   | 2693   | 2693   | 1       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| pause                                    | 23812           | 39347  | 47115  | 47115  | 6       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| paused                                   | 2426            | 2426   | 2426   | 2426   | 2       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| revokeEndorsement                        | 33213           | 52359  | 59591  | 59591  | 7       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| revokeReference                          | 33170           | 50552  | 57079  | 57079  | 7       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| totalEndorsements                        | 2404            | 2404   | 2404   | 2404   | 258     |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| totalReferences                          | 2428            | 2428   | 2428   | 2428   | 1       |
+|------------------------------------------+-----------------+--------+--------+--------+---------|
+| unpause                                  | 23835           | 24526  | 24526  | 25218  | 2       |
+╰------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭----------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/SkillClaim.sol:SkillClaim Contract |                 |        |        |        |         |
++===============================================================================================+
+| Deployment Cost                        | Deployment Size |        |        |        |         |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| 2310821                                | 10541           |        |        |        |         |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+|                                        |                 |        |        |        |         |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                          | Min             | Avg    | Median | Max    | # Calls |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| ADMIN_ROLE                             | 323             | 323    | 323    | 323    | 1       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_CLAIMS_PER_USER                    | 228             | 228    | 228    | 228    | 201     |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| VERIFIER_ROLE                          | 300             | 300    | 300    | 300    | 116     |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| approveClaim                           | 26872           | 66763  | 65945  | 127868 | 146     |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| approvedClaims                         | 2393            | 2393   | 2393   | 2393   | 1       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| assignClaim                            | 23928           | 83104  | 84659  | 101759 | 261     |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| createClaim                            | 25623           | 204308 | 203655 | 220827 | 4692    |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| disputeClaim                           | 33900           | 39311  | 41382  | 41563  | 6       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| getClaim                               | 23734           | 24186  | 23989  | 28285  | 14      |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| getClaimsByStatus                      | 10636           | 156997 | 59254  | 542024 | 14      |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| getUserClaims                          | 2981            | 57635  | 22498  | 260672 | 12      |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| getUserClaimsCount                     | 2568            | 2568   | 2568   | 2568   | 2       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| getVerifierClaims                      | 8274            | 17710  | 15996  | 28862  | 3       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| getVerifierClaimsCount                 | 2612            | 2612   | 2612   | 2612   | 1       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| grantRole                              | 51301           | 51301  | 51301  | 51301  | 116     |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| hasRole                                | 2704            | 2704   | 2704   | 2704   | 1       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| pause                                  | 23834           | 39369  | 47137  | 47137  | 3       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| rejectClaim                            | 26905           | 67551  | 66943  | 84187  | 67      |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| rejectedClaims                         | 2415            | 2415   | 2415   | 2415   | 1       |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| totalClaims                            | 2395            | 2395   | 2395   | 2395   | 258     |
+|----------------------------------------+-----------------+--------+--------+--------+---------|
+| updateEvidence                         | 36176           | 39778  | 39778  | 43380  | 4       |
+╰----------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭--------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/SkillProfile.sol:SkillProfile Contract |                 |        |        |        |         |
++===================================================================================================+
+| Deployment Cost                            | Deployment Size |        |        |        |         |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| 3757790                                    | 17158           |        |        |        |         |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                            |                 |        |        |        |         |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                              | Min             | Avg    | Median | Max    | # Calls |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| ADMIN_ROLE                                 | 334             | 334    | 334    | 334    | 3       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_EDUCATION_PER_USER                     | 328             | 328    | 328    | 328    | 21      |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_EXPERIENCE_PER_USER                    | 326             | 326    | 326    | 326    | 51      |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_SKILLS_PER_USER                        | 327             | 327    | 327    | 327    | 101     |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| VERIFIER_ROLE                              | 333             | 333    | 333    | 333    | 62      |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| addEducation                               | 36288           | 172022 | 175503 | 192759 | 45      |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| addExperience                              | 35689           | 157171 | 154482 | 191670 | 84      |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| addSkill                                   | 32707           | 136945 | 130188 | 147336 | 641     |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| createProfile                              | 25757           | 172628 | 170679 | 188091 | 4543    |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getEducation                               | 20366           | 47807  | 20366  | 88972  | 5       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getEducationCount                          | 2688            | 2688   | 2688   | 2688   | 1       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getExperience                              | 19421           | 78020  | 19421  | 165919 | 5       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getExperienceCount                         | 2646            | 2646   | 2646   | 2646   | 1       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getRoleAdmin                               | 2512            | 2512   | 2512   | 2512   | 1       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getSkills                                  | 2966            | 27618  | 16459  | 669875 | 277     |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| getSkillsCount                             | 2624            | 2624   | 2624   | 2624   | 2       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| grantRole                                  | 26770           | 50905  | 51301  | 51301  | 62      |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| hasRole                                    | 2759            | 2759   | 2759   | 2759   | 5       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| pause                                      | 23747           | 43721  | 47050  | 47050  | 7       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| paused                                     | 2337            | 2337   | 2337   | 2337   | 2       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| profiles                                   | 15948           | 15948  | 15948  | 15948  | 3       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| removeEducation                            | 33180           | 56429  | 56429  | 79678  | 2       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| removeExperience                           | 33268           | 55013  | 55013  | 76758  | 2       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| removeSkill                                | 33165           | 53484  | 61409  | 65880  | 3       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| totalProfiles                              | 2338            | 2338   | 2338   | 2338   | 258     |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| unpause                                    | 23769           | 24691  | 25152  | 25152  | 3       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| updateProfile                              | 33243           | 42006  | 42006  | 50770  | 2       |
+|--------------------------------------------+-----------------+--------+--------+--------+---------|
+| verifySkill                                | 26407           | 47788  | 55341  | 55353  | 10      |
+╰--------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭------------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/TakumiTimelock.sol:TakumiTimelock Contract |                 |        |        |        |         |
++=======================================================================================================+
+| Deployment Cost                                | Deployment Size |        |        |        |         |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| 1636607                                        | 7874            |        |        |        |         |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                |                 |        |        |        |         |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                                  | Min             | Avg    | Median | Max    | # Calls |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| DEFAULT_ADMIN_ROLE                             | 282             | 282    | 282    | 282    | 10      |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| EXECUTOR_ROLE                                  | 285             | 285    | 285    | 285    | 1       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| PROPOSER_ROLE                                  | 284             | 284    | 284    | 284    | 1       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| cancel                                         | 25977           | 25977  | 25977  | 25977  | 1       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| execute                                        | 28671           | 44435  | 28720  | 66111  | 7       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| executeBatch                                   | 100547          | 100547 | 100547 | 100547 | 1       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getMinDelay                                    | 301             | 301    | 301    | 301    | 2       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| hasRole                                        | 2692            | 2692   | 2692   | 2692   | 3       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| hashOperation                                  | 1210            | 1210   | 1210   | 1210   | 2       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isOperationDone                                | 2627            | 2627   | 2627   | 2627   | 1       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isOperationPending                             | 2678            | 2686   | 2690   | 2690   | 3       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isOperationReady                               | 2663            | 2663   | 2663   | 2664   | 2       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| renounceRole                                   | 24622           | 24622  | 24622  | 24622  | 9       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| schedule                                       | 25964           | 49624  | 54102  | 54744  | 6       |
+|------------------------------------------------+-----------------+--------+--------+--------+---------|
+| scheduleBatch                                  | 63211           | 63211  | 63211  | 63211  | 1       |
+╰------------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭----------------------------------------------------------------+-----------------+-------+--------+-------+---------╮
+| src/TemporaryDeployFactory.sol:TemporaryDeployFactory Contract |                 |       |        |       |         |
++=====================================================================================================================+
+| Deployment Cost                                                | Deployment Size |       |        |       |         |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| 12464099                                                       | 57699           |       |        |       |         |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+|                                                                |                 |       |        |       |         |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| Function Name                                                  | Min             | Avg   | Median | Max   | # Calls |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| endorsementAddress                                             | 2348            | 2348  | 2348   | 2348  | 1       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| getDeployedContracts                                           | 9735            | 9735  | 9735   | 9735  | 1       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| owner                                                          | 2385            | 2385  | 2385   | 2385  | 1       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| pause                                                          | 23476           | 26313 | 27732  | 27732 | 3       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| paused                                                         | 2353            | 2353  | 2353   | 2353  | 5       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| revokeFactory                                                  | 23453           | 27492 | 27492  | 31531 | 4       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| revoked                                                        | 2414            | 2414  | 2414   | 2414  | 3       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| skillClaimAddress                                              | 2391            | 2391  | 2391   | 2391  | 1       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| skillProfileAddress                                            | 2348            | 2348  | 2348   | 2348  | 1       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| unpause                                                        | 23432           | 25545 | 25545  | 27659 | 2       |
+|----------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| verifierRegistryAddress                                        | 2392            | 2392  | 2392   | 2392  | 1       |
+╰----------------------------------------------------------------+-----------------+-------+--------+-------+---------╯
+
+╭----------------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/VerifierRegistry.sol:VerifierRegistry Contract |                 |        |        |        |         |
++===========================================================================================================+
+| Deployment Cost                                    | Deployment Size |        |        |        |         |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| 3220284                                            | 14747           |        |        |        |         |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                    |                 |        |        |        |         |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                                      | Min             | Avg    | Median | Max    | # Calls |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| ADMIN_ROLE                                         | 269             | 269    | 269    | 269    | 5       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| MAX_SPECIALIZATIONS                                | 262             | 262    | 262    | 262    | 50      |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| activeVerifierCount                                | 2339            | 2339   | 2339   | 2339   | 264     |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| addSpecialization                                  | 29176           | 123859 | 124907 | 199346 | 54      |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| changeVerifierStatus                               | 26387           | 44241  | 41311  | 85243  | 11      |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getActiveVerifiers                                 | 10324           | 10324  | 10324  | 10324  | 1       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getApprovalRate                                    | 33276           | 33339  | 33329  | 36184  | 256     |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getSpecializations                                 | 8308            | 11501  | 11501  | 14695  | 5       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getVerifier                                        | 35276           | 36875  | 36875  | 38474  | 4       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getVerifierStats                                   | 33388           | 35020  | 36244  | 36244  | 7       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| hasRole                                            | 2692            | 2692   | 2692   | 2692   | 1       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isRegisteredVerifier                               | 2627            | 2627   | 2627   | 2627   | 3       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| pause                                              | 23813           | 39348  | 47116  | 47116  | 3       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| recordVerification                                 | 28908           | 43691  | 42940  | 77140  | 16370   |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| registerVerifier                                   | 27038           | 328487 | 324743 | 407160 | 4269    |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| removeSpecialization                               | 28679           | 37983  | 38544  | 46166  | 4       |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| updateVerifier                                     | 28612           | 34736  | 29695  | 50944  | 4       |
+╰----------------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+
+Ran 9 test suites in 11.00s (16.39s CPU time): 203 tests passed, 6 failed, 0 skipped (209 total tests)
+
+Failing tests:
+Encountered 2 failing tests in test/Endorsement.t.sol:EndorsementTest
+[FAIL: Batch endorsements inefficient] testGasBatchEndorsements() (gas: 1170424)
+[FAIL: Create reference uses too much gas] testGasCreateReference() (gas: 275545)
+
+Encountered 1 failing test in test/SkillClaim.t.sol:SkillClaimTest
+[FAIL: Create claim uses too much gas] testGasCreateClaim() (gas: 229505)
+
+Encountered 1 failing test in test/TemporaryDeployFactory.t.sol:TemporaryDeployFactoryTest
+[FAIL: Deployment uses too much gas] testDeploymentGas() (gas: 12520568)
+
+Encountered 2 failing tests in test/VerifierRegistry.t.sol:VerifierRegistryTest
+[FAIL: Batch registration inefficient] testGasBatchVerifierRegistration() (gas: 1676421)
+[FAIL: Register verifier uses too much gas] testGasRegisterVerifier() (gas: 398198)
+
+Encountered a total of 6 failing tests, 203 tests succeeded
