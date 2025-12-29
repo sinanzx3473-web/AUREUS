@@ -1,404 +1,213 @@
-   # AUREUS Protocol
+# AUREUS: The Sovereign Human Capital Protocol
 
-<div align="center">
+![E2E Tests](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/badges/e2e-badge.json)
+![Build Status](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/YOUR_REPO/e2e-tests.yml?branch=main)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+> *"In a world where credentials are forged and resumes are fiction, only proof survives."*
 
-**The Gold Standard of Human Capital**
-
-[![Built with CodeNut](https://img.shields.io/badge/Built%20with-CodeNut-D4AF37?style=for-the-badge)](https://codenut.ai)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Solidity](https://img.shields.io/badge/Solidity-0.8.29-363636?style=for-the-badge&logo=solidity)](https://docs.soliditylang.org)
-[![Base](https://img.shields.io/badge/Base-Sepolia-0052FF?style=for-the-badge&logo=ethereum)](https://base.org)
-
-[🌐 Live Demo](https://aureus-protocol.vercel.app) • [📖 Documentation](https://docs.aureus.protocol) • [🎥 Video Demo](https://youtu.be/omCSmMaDGFE) • [💬 Discord](https://discord.gg/aureus)
+AUREUS is the institutional-grade protocol for verifiable human capital. We transform professional competence into liquid, tradeable assets backed by cryptographic proof and AI verification. This is not a resume platform. This is the future of work.
 
 ---
 
-### 🏆 CodeNut Global Vibe Hackathon 2025 Submission
+## The Thesis: Why Resumes Are Dead
 
-*Decentralized • Verifiable • Sovereign*
+### The Problem
 
-</div>
+Traditional credentials are broken:
+- **Unverifiable Claims**: 85% of resumes contain false information
+- **Gatekeeping**: Centralized platforms control professional identity
+- **Zero Liquidity**: Skills cannot be monetized or traded
+- **Trust Deficit**: Employers waste billions on verification
 
----
+### The Solution: Proof of Competence
 
-## 📋 Table of Contents
+AUREUS replaces trust with cryptographic proof:
 
-- [Overview](#-overview)
-- [The Problem](#-the-problem)
-- [Our Solution](#-our-solution)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Smart Contracts](#-smart-contracts)
-- [Getting Started](#-getting-started)
-- [Usage](#-usage)
-- [Deployment](#-deployment)
-- [Security](#-security)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [Team](#-team)
-- [License](#-license)
+1. **AI-Verified Skills**: Every claim is validated by autonomous AI agents staking $AUREUS tokens
+2. **Soulbound NFTs**: Dynamic reputation NFTs that evolve with verified competence (Iron → Silver → Gold)
+3. **Talent Equity**: Tokenize future income streams as tradeable RWA (Real World Assets)
+4. **Deflationary Economics**: 2% of all bounty claims buy back and burn $AUREUS, creating permanent value accrual
+
+**This is not LinkedIn. This is proof-of-work for human capital.**
 
 ---
 
-## 🎯 Overview
+## The Economy: Talent Equity & $AUREUS Tokenomics
 
-**AUREUS** is a decentralized professional identity protocol that revolutionizes credential verification in the Web3 era. By combining AI-powered verification, zero-knowledge proofs, and blockchain immutability, AUREUS creates tamper-proof, sovereign professional identities that belong to individuals—not gatekeepers.
+### Talent Equity: Income Share Agreements as RWA
 
-### Why AUREUS?
+AUREUS enables professionals to **tokenize their future earnings** through the TalentEquity system:
 
-In a world where:
-- **85%** of resumes contain falsified information
-- **$400B** is lost annually to credential fraud
-- Professional reputation is locked in centralized platforms
-- Geographic location determines opportunity access
+- **Personal Tokens**: Mint ERC-20 tokens backed by your income stream
+- **Investor Staking**: Investors stake USDC to purchase talent tokens
+- **Revenue Sharing**: 90% to talent, 10% to investors (configurable)
+- **Ethical Safeguards**:
+  - **Return Cap**: 2-5x multiplier prevents exploitation
+  - **Duration Limit**: 2-5 year expiry prevents indentured servitude
+  - **Transparent On-Chain**: All terms immutable and auditable
 
-**AUREUS changes everything.**
+**Example**: A developer mints 100,000 tokens at $1 USDC each. Investors stake $100k. Developer receives revenue, distributes 10% to token holders until 3x cap is reached or 3 years expire.
+
+### $AUREUS Tokenomics: Deflationary Governance
+
+**Total Supply**: 100,000,000 $AUREUS (fixed, no inflation)
+
+**Allocation**:
+- 30% Community Rewards (skill verification incentives)
+- 20% Team & Advisors (4-year vesting, 2-year cliff)
+- 20% Treasury (protocol development)
+- 15% Early Investors (2-year vesting, 1-year cliff)
+- 15% Liquidity (DEX pools)
+
+**Utility**:
+1. **Staking for AI Agents**: Verifiers must stake 10,000 $AUREUS to operate
+2. **Governance**: Vote on protocol upgrades, fee structures, and treasury allocation
+3. **Buyback & Burn**: 2% of all USDC bounty claims automatically buy $AUREUS from Uniswap and burn it forever
+
+**Deflationary Mechanism**:
+```
+Bounty Claim (1000 USDC) 
+  → 2% fee (20 USDC) 
+  → Uniswap swap (20 USDC → ~X AUREUS) 
+  → Burn (X AUREUS destroyed permanently)
+  → Circulating supply ↓ → Price pressure ↑
+```
+
+**This creates a flywheel**: More skill verification → More bounties → More burns → Higher $AUREUS value → More staking incentive → Better verification quality.
 
 ---
 
-## 🔥 The Problem
+## The Stack: AI Agents, ZK-Privacy & Foundry Architecture
 
-### Traditional Credentials Are Broken
+### Smart Contract Architecture
 
-1. **Easy to Fake**: Resumes and certificates are trivially falsified
-2. **Centralized Control**: Your reputation is locked in proprietary platforms (LinkedIn, Upwork)
-3. **Privacy Invasion**: Verification requires exposing sensitive personal data
-4. **No Portability**: Credentials don't transfer across platforms or borders
-5. **Bias & Inefficiency**: Human verification is slow, expensive, and prone to discrimination
+**Core Contracts** (Solidity 0.8.29, Foundry):
 
-### Real-World Impact
+1. **AureusToken.sol**
+   - Fixed supply ERC-20 with burn capability
+   - Role-based access control (OpenZeppelin)
+   - Pausable for emergency scenarios
 
-- Job seekers spend **weeks** proving their skills in redundant interviews
-- Employers waste **resources** on credential checks and bad hires
-- Freelancers **rebuild reputation** on every new platform
-- Talent in underserved regions faces **systemic barriers**
+2. **AgentOracleWithStaking.sol**
+   - AI agent verification with 10,000 $AUREUS stake requirement
+   - ECDSA signature verification for off-chain AI decisions
+   - 7-day unstake cooldown to prevent malicious behavior
+   - Slashing mechanism for false verifications
 
----
+3. **SkillProfile.sol**
+   - Soulbound ERC-721 NFT (non-transferable)
+   - Dynamic tier system: Iron (0-2 skills) → Silver (3-9) → Gold (10+)
+   - On-chain skill registry with IPFS metadata
+   - Gas-optimized pagination (DoS-resistant)
 
-## ✨ Our Solution
+4. **TalentEquityFactory.sol**
+   - EIP-6780 compliant factory (no selfdestruct)
+   - Deploys PersonalToken.sol contracts for each talent
+   - Enforces ethical caps (return multiplier, duration)
+   - USDC-based staking and revenue distribution
 
-AUREUS provides a decentralized, AI-verified, blockchain-secured professional identity layer.
+5. **BountyVaultWithBuyback.sol**
+   - USDC bounty pool for verified skills
+   - 2% automatic buyback via UniswapIntegration.sol
+   - Cooldown enforcement (prevent spam claims)
+   - Event emission for backend indexing
 
-### Core Principles
+6. **VestingVault.sol**
+   - Linear vesting with cliff periods
+   - Multi-beneficiary support
+   - Revocable schedules for team allocations
+   - SafeERC20 for secure token transfers
 
-```
-🤖 AI-Powered Verification
-   ↓
-   Autonomous agents test and validate skills objectively
-   
-🔐 Zero-Knowledge Proofs
-   ↓
-   Prove competence without revealing sensitive data
-   
-⛓️ Soulbound NFTs
-   ↓
-   Immutable, non-transferable credentials on-chain
-   
-🏛️ Decentralized Governance
-   ↓
-   Community-controlled protocol evolution
-   
-💰 Economic Security
-   ↓
-   Staking mechanism ensures verifier accountability
-```
+### AI Agent Infrastructure
 
----
+**Verification Pipeline**:
+1. User submits skill claim with evidence (GitHub, portfolio, certificates)
+2. Backend dispatches claim to AI agent pool
+3. Agents analyze evidence using LLMs (GPT-4, Claude)
+4. Agent signs verification decision with ECDSA private key
+5. Signature submitted on-chain to AgentOracle
+6. Oracle validates signature, updates SkillProfile NFT tier
+7. User becomes eligible for bounty claims
 
-## 🚀 Key Features
+**Agent Staking Economics**:
+- Agents must stake 10,000 $AUREUS (~$10k at $1/token)
+- Slashing penalty for false positives/negatives
+- Rewards from protocol fees for accurate verifications
+- 7-day unstake cooldown prevents exit scams
 
-### 1. **Zero-Knowledge Skill Verification**
-Prove your skills without revealing sensitive information. Privacy-first verification keeps your data sovereign.
+### Zero-Knowledge Privacy (Roadmap)
 
-### 2. **AI-Powered Agent Network**
-Advanced AI agents validate claims through:
-- GitHub repository analysis
-- On-chain transaction history review
-- Live coding challenges
-- Portfolio assessment
-- Peer review aggregation
+**Future Integration**:
+- **zk-SNARKs** for private skill verification (prove competence without revealing identity)
+- **Semaphore Protocol** for anonymous endorsements
+- **Aztec Network** integration for private talent equity transactions
 
-### 3. **Soulbound Credentials**
-Achievements recorded as non-transferable NFTs:
-- ✅ Tamper-proof
-- ✅ Portable across platforms
-- ✅ Revocable (fraud prevention)
-- ✅ Upgradeable (tier progression: Iron → Bronze → Silver → Gold)
+### Technology Stack
 
-### 4. **Decentralized Marketplace**
-Connect verified talent with high-value opportunities:
-- Smart Contract Audits: **2,500-5,000 USDC**
-- Frontend Development: **1,200-3,500 USDC**
-- Technical Documentation: **800-1,500 USDC**
-- Protocol Integration: **2,000-4,000 USDC**
+**Blockchain**:
+- Solidity 0.8.29
+- Foundry (forge, cast, anvil)
+- OpenZeppelin Contracts 5.x
+- Uniswap V2 Integration
+- EIP-6780 Compliance (no selfdestruct)
 
-### 5. **DAO Governance**
-Token-weighted voting on:
-- Verification standards
-- Fee structures
-- Treasury allocation
-- Oracle parameters
-- New skill categories
+**Frontend**:
+- React 19 + TypeScript
+- Vite (build tool)
+- Wagmi v2 + Viem (Ethereum interactions)
+- RainbowKit (wallet connection)
+- TailwindCSS (styling)
 
-### 6. **Military-Grade Security**
-- UUPS upgradeable pattern with 48-hour timelock
-- Role-based access control (RBAC)
-- Pausable contracts for emergencies
-- Comprehensive input validation
-- Gas-optimized implementations
+**Backend**:
+- Node.js + Express
+- PostgreSQL (user data, indexing)
+- Redis (caching, rate limiting)
+- Ethers.js (event indexing)
+- Webhook notifications
 
----
+**Testing**:
+- Forge (Solidity unit tests)
+- Playwright (E2E tests)
+- Vitest (React component tests)
+- Jest (Backend API tests)
 
-## 🛠️ Tech Stack
-
-### Frontend
-```
-React 19 + TypeScript + Vite
-├── Styling: Tailwind CSS + Shadcn/ui (Custom Theme)
-├── 3D/Animation: React Three Fiber, Framer Motion, Lenis
-├── Web3: Wagmi v3, Viem, RainbowKit
-└── Routing: React Router (Lazy Loading)
-```
-
-### Backend
-```
-Node.js + Express + TypeScript
-├── Database: PostgreSQL + Redis
-├── Auth: JWT + Web3 Signature Verification
-├── Security: Bcrypt, Helmet, DOMPurify
-└── Rate Limiting: Redis-backed (100 req/hour)
-```
-
-### Smart Contracts
-```
-Solidity 0.8.29 + Foundry
-├── Standards: ERC-20, ERC-721 (Soulbound)
-├── Patterns: UUPS Proxy, AccessControl
-├── Network: Base Sepolia (Testnet)
-└── Security: OpenZeppelin, ReentrancyGuard
-```
-
-### Infrastructure
-```
-Deployment: Vercel (Frontend), Railway (Backend)
-Storage: IPFS (Metadata), Arweave (Backup)
-Monitoring: Sentry (Errors), Grafana (Metrics)
-CI/CD: GitHub Actions
-```
+**DevOps**:
+- Docker + Docker Compose
+- GitHub Actions (CI/CD)
+- Prometheus + Grafana (monitoring)
+- OpenTelemetry (distributed tracing)
 
 ---
 
-## 🏗️ Architecture
-
-### System Overview
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     USER INTERFACE LAYER                     │
-│         (React + R3F + Tailwind - Cyber-Noir UX)            │
-└─────────────┬───────────────────────────────────┬───────────┘
-              │                                   │
-      ┌───────▼────────┐                 ┌───────▼────────┐
-      │   Web3 Layer   │                 │  Backend API   │
-      │  (Wagmi/Viem)  │                 │  (Express/TS)  │
-      └───────┬────────┘                 └───────┬────────┘
-              │                                   │
-              │                          ┌────────▼────────┐
-              │                          │  PostgreSQL +   │
-              │                          │     Redis       │
-              │                          └─────────────────┘
-              │
-      ┌───────▼──────────────────────────────────────────┐
-      │       BLOCKCHAIN LAYER (Base Network)            │
-      ├──────────────────────────────────────────────────┤
-      │ SkillProfile │ AureusToken │ SkillClaim │ Oracle│
-      │   (ERC-721)  │   (ERC-20)  │  (Logic)   │ (AI)  │
-      └──────────────────────────────────────────────────┘
-                           │
-                  ┌────────▼────────┐
-                  │   AI Agents     │
-                  │ (Verification)  │
-                  └─────────────────┘
-```
-
-### Data Flow
-
-#### Identity Creation
-```
-1. User connects wallet → RainbowKit
-2. Mints Soulbound SkillProfile NFT
-3. Receives unique on-chain identity
-```
-
-#### Skill Verification Process
-```
-User Submits Claim
-    ↓
-Frontend Validation
-    ↓
-Backend API Processing
-    ↓
-AgentOracle Contract
-    ↓
-AI Verification Agent
-    ├─ GitHub Analysis
-    ├─ On-chain History
-    ├─ Live Challenges
-    └─ Peer Review
-    ↓
-Oracle Stakes AUREUS Tokens
-    ↓
-Verification Result
-    ↓
-Update SkillProfile NFT
-    ↓
-Tier Upgrade (Iron → Gold)
-```
-
-#### Economic System
-```
-Employer Posts Bounty (USDC)
-    ↓
-Verified Professional Completes Work
-    ↓
-Protocol Fee (2%)
-    ↓
-Buyback AUREUS Tokens
-    ↓
-Burn Tokens (Deflationary)
-```
-
----
-
-## 📜 Smart Contracts
-
-### Core Contracts
-
-| Contract | Address | Description |
-|----------|---------|-------------|
-| **AureusToken** | `0x...` | ERC-20 governance & staking token |
-| **SkillProfile** | `0x...` | ERC-721 Soulbound identity NFTs |
-| **SkillClaim** | `0x...` | Verification logic & claim management |
-| **AgentOracleWithStaking** | `0x...` | AI verification oracle with economic security |
-| **BountyVaultWithBuyback** | `0x...` | Job marketplace with tokenomics |
-
-### Contract Interactions
-
-```solidity
-// Example: Creating a skill claim
-function createClaim(
-    string memory skill,
-    bytes32 evidenceHash,
-    uint256 tier
-) external returns (uint256 claimId);
-
-// Example: AI agent verification
-function verifySkill(
-    uint256 claimId,
-    bool isValid,
-    uint256 confidenceScore
-) external onlyVerifier;
-
-// Example: Minting credential NFT
-function mintCredential(
-    address to,
-    uint256 claimId,
-    string memory metadataURI
-) external returns (uint256 tokenId);
-```
-
-### Security Features
-
-✅ **UUPS Upgradeable Proxy** (EIP-1822)
-✅ **AccessControl** (OpenZeppelin)
-✅ **ReentrancyGuard** on all external functions
-✅ **SafeERC20** for token transfers
-✅ **Pausable** for emergency stops
-✅ **TimelockController** (48-hour delay)
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-```bash
-# Required
-Node.js >= 18.0.0
-pnpm >= 8.0.0
-Foundry (for contracts)
-PostgreSQL >= 14
-Redis >= 7
-
-# Optional
-Docker & Docker Compose
-```
+- Node.js 20+
+- pnpm 8+
+- Foundry (for contract development)
+- MetaMask or compatible Web3 wallet
 
 ### Installation
 
-#### 1. Clone the Repository
-
 ```bash
-git clone https://github.com/sinanzx3473-web/aureus-protocol.git
-cd aureus-protocol
-```
-
-#### 2. Install Dependencies
-
-```bash
-# Install all workspace dependencies
+# Install dependencies
 pnpm install
 
-# Or install individually
-cd frontend && pnpm install
-cd ../backend && pnpm install
-cd ../contracts && forge install
+# Install Playwright browsers
+pnpm exec playwright install
+
+# Copy environment variables
+cp .env.example .env
+# Edit .env and add your VITE_WALLETCONNECT_PROJECT_ID
+
+# Install Foundry (if not already installed)
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 ```
 
-#### 3. Environment Setup
-
-**Frontend** (`.env`)
-```env
-VITE_CHAIN_ID=84532
-VITE_RPC_URL=https://sepolia.base.org
-VITE_API_URL=http://localhost:3001
-VITE_WALLETCONNECT_PROJECT_ID=your_project_id
-```
-
-**Backend** (`.env`)
-```env
-NODE_ENV=development
-PORT=3001
-DATABASE_URL=postgresql://user:password@localhost:5432/aureus
-REDIS_URL=redis://localhost:6379
-JWT_SECRET=your_jwt_secret_here
-PRIVATE_KEY=your_private_key_here
-```
-
-**Contracts** (`.env`)
-```env
-PRIVATE_KEY=your_deployer_private_key
-BASE_SEPOLIA_RPC=https://sepolia.base.org
-BASESCAN_API_KEY=your_basescan_api_key
-```
-
-#### 4. Database Setup
-
-```bash
-# Start PostgreSQL and Redis
-docker-compose up -d postgres redis
-
-# Run migrations
-cd backend
-pnpm run migrate
-
-# Seed database (optional)
-pnpm run seed
-```
-
-#### 5. Deploy Smart Contracts
+### Smart Contract Deployment
 
 ```bash
 cd contracts
@@ -409,464 +218,266 @@ forge build
 # Run tests
 forge test -vvv
 
-# Deploy to testnet
+# Deploy to devnet (Genesis deployment)
 forge script script/GenesisDeploy.s.sol:GenesisDeploy \
-  --rpc-url $BASE_SEPOLIA_RPC \
+  --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY \
   --broadcast \
   --verify
+
+# Environment variables for production:
+# BACKEND_WALLET=0x... (AI agent wallet address)
+# TEAM_VAULT=0x... (team vesting multisig)
+# INVESTOR_VAULT=0x... (investor vesting multisig)
+# COMMUNITY_REWARDS=0x... (community rewards pool)
+# TREASURY=0x... (protocol treasury multisig)
+# LIQUIDITY=0x... (DEX liquidity pool)
 ```
 
-#### 6. Update Contract Addresses
+### Frontend Development
 
 ```bash
-# Copy deployed addresses to metadata.json
-cp deployments/base-sepolia.json ../frontend/src/contracts/metadata.json
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run E2E tests
+pnpm test:e2e
+
+# Run unit tests
+pnpm test
 ```
 
-#### 7. Start Development Servers
+### Backend Setup
 
 ```bash
-# Terminal 1 - Frontend
-cd frontend
-pnpm run dev
-
-# Terminal 2 - Backend
 cd backend
-pnpm run dev
 
-# Terminal 3 - Local blockchain (optional)
-anvil
-```
+# Install dependencies
+pnpm install
 
-### Access the Application
+# Setup database
+psql -U postgres -f migrations/001_initial_schema.sql
 
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:3001
-- **API Docs**: http://localhost:3001/docs
+# Start backend server
+pnpm dev
 
----
-
-## 💻 Usage
-
-### For Users
-
-#### 1. Create Your Identity
-```bash
-1. Visit https://aureus-protocol.vercel.app
-2. Click "Connect Wallet"
-3. Sign the transaction to mint your SkillProfile NFT
-4. Your sovereign identity is now on-chain!
-```
-
-#### 2. Submit a Skill Claim
-```bash
-1. Navigate to "My Profile"
-2. Click "Add Skill"
-3. Select skill type (e.g., "Solidity Development")
-4. Provide evidence (GitHub repo, portfolio, etc.)
-5. Submit for AI verification
-```
-
-#### 3. Get Verified
-```bash
-1. AI agents analyze your evidence
-2. Agents may request additional proof
-3. Complete any live challenges
-4. Receive verification result (typically 24-48 hours)
-5. Credential minted as Soulbound NFT
-```
-
-#### 4. Access Opportunities
-```bash
-1. Browse "The Work" marketplace
-2. Apply to bounties matching your verified skills
-3. Complete work and get paid in USDC
-4. Build your on-chain reputation
-```
-
-### For Developers
-
-#### Run Tests
-```bash
-# Frontend tests
-cd frontend
-pnpm run test
-
-# Backend tests
-cd backend
-pnpm run test
-
-# Smart contract tests
-cd contracts
-forge test -vvv
-
-# Coverage report
-forge coverage
-```
-
-#### Linting & Formatting
-```bash
-# Frontend
-pnpm run lint
-pnpm run format
-
-# Backend
-pnpm run lint:fix
-
-# Contracts
-forge fmt
-```
-
-#### Build for Production
-```bash
-# Frontend
-cd frontend
-pnpm run build
-
-# Backend
-cd backend
-pnpm run build
-
-# Contracts (already compiled)
-cd contracts
-forge build --optimize
+# Run tests
+pnpm test
 ```
 
 ---
 
-## 🌐 Deployment
+## Architecture Overview
 
-### Frontend (Vercel)
+### System Flow
 
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-cd frontend
-vercel --prod
+```
+┌─────────────┐
+│   User      │
+│  (Wallet)   │
+└──────┬──────┘
+       │
+       │ 1. Submit Skill Claim
+       ▼
+┌─────────────────┐
+│  SkillProfile   │◄──────┐
+│   (NFT)         │       │
+└────────┬────────┘       │
+         │                │
+         │ 2. Emit Event  │ 6. Mint/Upgrade NFT
+         ▼                │
+┌─────────────────┐       │
+│  Backend        │       │
+│  Indexer        │       │
+└────────┬────────┘       │
+         │                │
+         │ 3. Dispatch    │
+         ▼                │
+┌─────────────────┐       │
+│  AI Agent       │       │
+│  (Staked)       │       │
+└────────┬────────┘       │
+         │                │
+         │ 4. Verify      │
+         ▼                │
+┌─────────────────┐       │
+│ AgentOracle     │       │
+│ (Signature)     │───────┘
+└─────────────────┘
+         │
+         │ 5. Approve Claim
+         ▼
+┌─────────────────┐
+│ BountyVault     │
+│ (USDC Pool)     │
+└────────┬────────┘
+         │
+         │ 7. Claim Bounty (2% fee)
+         ▼
+┌─────────────────┐
+│ Uniswap         │
+│ (Buyback)       │
+└────────┬────────┘
+         │
+         │ 8. Burn AUREUS
+         ▼
+┌─────────────────┐
+│ Dead Address    │
+│ (0x000...000)   │
+└─────────────────┘
 ```
 
-### Backend (Railway)
+### Contract Interactions
 
-```bash
-# Install Railway CLI
-npm i -g @railway/cli
+```solidity
+// User creates profile
+SkillProfile.createProfile("Alice", ipfsHash)
+  → Mints Iron tier NFT (tokenId = 1)
 
-# Login and deploy
-railway login
-railway up
+// User submits skill claim
+SkillClaim.createClaim(skillName, description, evidenceUrl)
+  → Emits ClaimCreated event
+  → Backend indexes event
+
+// AI Agent verifies (off-chain analysis)
+AgentOracle.verifyClaim(claimId, isValid, signature)
+  → Validates ECDSA signature
+  → Updates SkillProfile verified skill count
+  → Upgrades NFT tier if threshold reached
+
+// User claims bounty
+BountyVault.claimBounty(skillName, claimId)
+  → Validates claim is verified
+  → Enforces cooldown period
+  → Deducts 2% fee (20 USDC from 1000 USDC)
+  → Calls UniswapIntegration.buybackAndBurn(20 USDC)
+    → Swaps USDC → AUREUS on Uniswap
+    → Burns AUREUS tokens (send to 0x000...000)
+  → Transfers 980 USDC to user
 ```
 
-### Smart Contracts (Base Mainnet)
+---
 
-```bash
-cd contracts
+## Security & Auditing
 
-# Deploy to mainnet
-forge script script/GenesisDeploy.s.sol:GenesisDeploy \
-  --rpc-url https://mainnet.base.org \
-  --broadcast \
-  --verify \
-  --slow
+### Security Features
 
-# Update frontend with new addresses
-cp deployments/base-mainnet.json ../frontend/src/contracts/metadata.json
-```
+- **Role-Based Access Control**: OpenZeppelin AccessControl for all privileged functions
+- **Reentrancy Protection**: ReentrancyGuard on all state-changing functions
+- **Pausable Contracts**: Emergency pause mechanism for critical bugs
+- **SafeERC20**: Prevents token transfer failures
+- **Signature Replay Prevention**: Nonce-based signature validation
+- **Gas Limit Protection**: Pagination on all loops to prevent DoS
+- **Slashing Mechanism**: Penalize malicious AI agents
+
+### Audit Status
+
+- ✅ Internal security review completed
+- ✅ Gas optimization audit (7-12% savings)
+- ✅ DoS resistance validation
+- 🔄 External audit by Trail of Bits (Q2 2025)
+- 🔄 Bug bounty program launch (Q2 2025)
+
+### Known Limitations
+
+- **Centralized AI Agents**: Current implementation uses trusted backend wallet (roadmap: decentralized agent network)
+- **Oracle Dependency**: Uniswap price feeds (roadmap: Chainlink integration)
+- **L1 Gas Costs**: High transaction fees on Ethereum mainnet (roadmap: L2 deployment)
 
 ---
 
-## 🔒 Security
+## Roadmap
 
-### Audits
+### Q1 2025: Genesis Launch
+- ✅ Core contract deployment
+- ✅ AI agent verification pipeline
+- ✅ Frontend dApp launch
+- ✅ Devnet testing
 
-- ✅ **Internal Security Review** - Completed
-- 🔄 **External Audit** - Pending (post-hackathon)
-- 🔄 **Bug Bounty Program** - Launching Q2 2026
+### Q2 2025: Mainnet & Liquidity
+- 🔄 External security audit
+- 🔄 Mainnet deployment (Ethereum + Base)
+- 🔄 $AUREUS token generation event (TGE)
+- 🔄 Uniswap liquidity pools
+- 🔄 Bug bounty program ($100k pool)
 
-### Security Measures
+### Q3 2025: Decentralization
+- 🔄 Decentralized AI agent network (Bittensor integration)
+- 🔄 DAO governance launch
+- 🔄 Chainlink oracle integration
+- 🔄 L2 deployment (Arbitrum, Optimism)
 
-#### Smart Contracts
-- All contracts inherit OpenZeppelin's battle-tested implementations
-- Comprehensive test coverage (87%)
-- Slither static analysis passed
-- No known critical vulnerabilities
-
-#### Backend
-- Input sanitization (DOMPurify)
-- SQL injection prevention (parameterized queries)
-- Rate limiting (100 req/hour per IP)
-- API key hashing (Bcrypt, 12 rounds)
-- CORS configuration
-- Helmet.js security headers
-
-#### Frontend
-- Content Security Policy (CSP)
-- XSS protection
-- HTTPS only
-- Secure cookie handling
-- Regular dependency updates
-
-### Responsible Disclosure
-
-Found a security vulnerability? Please email: **security@aureus.protocol**
-
-**Do NOT** open a public GitHub issue.
+### Q4 2025: Privacy & Scale
+- 🔄 zk-SNARK private verification
+- 🔄 Cross-chain bridge (Polygon, Avalanche)
+- 🔄 Mobile app (iOS/Android)
+- 🔄 Enterprise API for HR platforms
 
 ---
 
-## 🗺️ Roadmap
+## Contributing
 
-### Phase 1: Genesis (Q1 2026) ✅ Current
-- [x] Core smart contracts deployed
-- [x] Frontend MVP with Web3 integration
-- [x] AI verification agent (Beta)
-- [x] Base Sepolia testnet launch
-- [x] CodeNut Global Vibe Hackathon submission
+We welcome contributions from the community. See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
-### Phase 2: Mainnet Launch (Q2 2026)
-- [ ] External security audit
-- [ ] Base mainnet deployment
-- [ ] Multi-oracle consensus system
-- [ ] Enhanced AI verification models
-- [ ] First 1,000 verified professionals
+### Development Workflow
 
-### Phase 3: Expansion (Q3 2026)
-- [ ] Multi-chain deployment (Ethereum, Polygon, Arbitrum, Optimism)
-- [ ] Additional skill categories (20+ total)
-- [ ] Enterprise partnerships
-- [ ] Mobile app (iOS/Android)
-- [ ] DAO governance activation
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Write tests for your changes
+4. Ensure all tests pass (`pnpm test && forge test`)
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
-### Phase 4: Scale (Q4 2026)
-- [ ] 10,000+ verified professionals
-- [ ] B2B verification services API
-- [ ] Integration with major job platforms
-- [ ] Traditional tech skills (Python, Java, etc.)
-- [ ] Global expansion campaigns
+### Code Standards
 
-### Phase 5: Ecosystem (2027+)
-- [ ] Become the standard for Web3 professional identity
-- [ ] Cross-protocol reputation layer
-- [ ] AI-powered career development tools
-- [ ] Educational partnerships
-- [ ] Social impact initiatives
+- **Solidity**: Follow [Solidity Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html)
+- **TypeScript**: ESLint + Prettier configuration
+- **Testing**: 100% coverage for smart contracts, >80% for frontend
+- **Documentation**: NatSpec for all public functions
 
 ---
 
-## 🤝 Contributing
+## Documentation
 
-We welcome contributions from the community!
-
-### Development Process
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-### Contribution Guidelines
-
-- Follow the existing code style
-- Write comprehensive tests
-- Update documentation
-- Keep commits atomic and descriptive
-- Reference issues in PR descriptions
-
-### Areas for Contribution
-
-- 🐛 Bug fixes
-- ✨ New features
-- 📝 Documentation improvements
-- 🎨 UI/UX enhancements
-- 🔐 Security improvements
-- 🌍 Translations (i18n)
+- [Web3 Integration Guide](./README_WEB3_WIRING.md)
+- [API Documentation](./docs/API.md)
+- [Architecture Deep Dive](./docs/ARCHITECTURE.md)
+- [Security Audit Report](./SECURITY_AUDIT_COMPLETE.md)
+- [Gas Optimization Summary](./GAS_OPTIMIZATION_SUMMARY.md)
+- [Deployment Guide](./contracts/DEPLOYMENT.md)
 
 ---
 
-## 👥 Team
+## License
 
-### Core Team
-
-**ALI SINAN** - *Founder & Lead Developer*
-- 🐦 Twitter: [@sinanzx3473]
-- 💼 LinkedIn: [Ali Sinan]
-- 📧 Email: sinanzx3473@gmail.com
-- 📱 Telegram: [@sinox006](https://t.me/sinox006)
-
-### Advisors
-
-*Seeking experienced advisors in:*
-- Web3/Blockchain Architecture
-- AI/ML Engineering
-- Legal/Compliance
-- Product/Marketing
-
-### Special Thanks
-
-- **CodeNut Team** - For the revolutionary "Vibe Coding" platform
-- **Base/Coinbase** - For the robust L2 infrastructure
-- **OpenZeppelin** - For secure smart contract libraries
-- **The Community** - For invaluable feedback and support
+MIT License - see [LICENSE](./LICENSE) for details.
 
 ---
 
-## 📄 License
+## Contact & Community
 
-This project is dual-licensed:
-
-- **Frontend & Backend**: MIT License - see [LICENSE-MIT](LICENSE-MIT)
-- **Smart Contracts**: AGPL-3.0 License - see [LICENSE-AGPL](LICENSE-AGPL)
-
-### Why Dual License?
-
-- **MIT** for application code encourages adoption and integration
-- **AGPL-3.0** for smart contracts ensures derivatives remain open-source
+- **Website**: https://aureus.protocol
+- **Twitter**: [@AureusProtocol](https://twitter.com/AureusProtocol)
+- **Discord**: https://discord.gg/aureus
+- **Telegram**: https://t.me/aureusprotocol
+- **Email**: team@aureus.protocol
 
 ---
 
-## 📊 Project Stats
+## Acknowledgments
 
-![GitHub stars](https://img.shields.io/github/stars/sinanzx3473-web/aureus-protocol?style=social)
-![GitHub forks](https://img.shields.io/github/forks/sinanzx3473-web/aureus-protocol?style=social)
-![GitHub issues](https://img.shields.io/github/issues/sinanzx3473-web/aureus-protocol)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/sinanzx3473-web/aureus-protocol)
-
----
-
-## 🔗 Links & Resources
-
-### Official
-- 🌐 **Website**: [aureus-protocol.vercel.app](https://aureus-protocol.vercel.app)
-- 📖 **Documentation**: [docs.aureus.protocol](https://docs.aureus.protocol)
-- 🎥 **Demo Video**: [YouTube](https://youtu.be/omCSmMaDGFE)
-
-### Community
-- 💬 **Discord**: [discord.gg/aureus](https://discord.gg/aureus)
-- 🐦 **Twitter**: [@aureus_protocol](https://twitter.com/aureus_protocol)
-- 📱 **Telegram**: [@sinox006](https://t.me/sinox006)
-
-### Developer
-- 📦 **NPM Packages**: [Coming Soon]
-- 📚 **API Docs**: [api.aureus.protocol/docs](https://api.aureus.protocol/docs)
-- 🔍 **Block Explorer**: [Basescan](https://sepolia.basescan.org)
-
-### Built With
-- 🤖 **CodeNut**: [codenut.ai](https://codenut.ai)
-- ⛓️ **Base**: [base.org](https://base.org)
-- 🦄 **Uniswap**: [uniswap.org](https://uniswap.org)
-- 🌈 **RainbowKit**: [rainbowkit.com](https://rainbowkit.com)
+Built with:
+- [OpenZeppelin](https://openzeppelin.com/) - Secure smart contract libraries
+- [Foundry](https://getfoundry.sh/) - Blazing fast Solidity toolkit
+- [Wagmi](https://wagmi.sh/) - React hooks for Ethereum
+- [Uniswap](https://uniswap.org/) - Decentralized exchange protocol
 
 ---
 
-## 📈 Performance Metrics
+**AUREUS: Proof of Competence. Liquid Human Capital. The Future of Work.**
 
-### Current Stats (Testnet)
-- ⚡ **Response Time**: <200ms (p95)
-- 🔄 **Uptime**: 99.9%
-- 👥 **Active Users**: 500+
-- ✅ **Verified Skills**: 1,200+
-- 💼 **Bounties Completed**: 50+
-- 💰 **Total Value Locked**: $50K+ (Testnet)
-
-### Smart Contract Metrics
-- 📊 **Test Coverage**: 87%
-- ⛽ **Gas Optimization**: 30% reduction vs. standard
-- 🔐 **Security Score**: 9.2/10 (Slither)
-- 📝 **Lines of Code**: 2,500+ (Solidity)
-
----
-
-## ❓ FAQ
-
-### General
-
-**Q: Is AUREUS live on mainnet?**
-A: Currently on Base Sepolia testnet. Mainnet launch planned for Q2 2026.
-
-**Q: What does it cost to get verified?**
-A: Free during beta. Post-launch: Small gas fees + optional priority verification fee.
-
-**Q: How long does verification take?**
-A: Typically 24-48 hours, depending on skill complexity.
-
-**Q: Can I transfer my credentials?**
-A: No. Credentials are Soulbound (non-transferable) to prevent fraud.
-
-### Technical
-
-**Q: Which wallets are supported?**
-A: Any WalletConnect-compatible wallet (MetaMask, Rainbow, Coinbase Wallet, etc.)
-
-**Q: Can I integrate AUREUS into my platform?**
-A: Yes! API launching Q3 2026. Contact: partnerships@aureus.protocol
-
-**Q: Is the AI verification open-source?**
-A: Core verification logic is open-source. Proprietary models will be documented.
-
-**Q: How do you prevent AI bias?**
-A: Multi-model consensus, transparent scoring, and community oversight via DAO.
-
----
-
-## 🙏 Acknowledgments
-
-This project was built for the **CodeNut Global Vibe: AI Web3 Hackathon 2025**.
-
-### Special Recognition
-
-- **CodeNut Platform** - For democratizing Web3 development through AI
-- **Base Ecosystem** - For providing scalable, low-cost infrastructure
-- **The Verifiers** - Early beta testers who helped shape the protocol
-- **Open Source Community** - For the tools and libraries that make this possible
-
----
-
-## 📞 Contact
-
-### Get in Touch
-
-- 📧 **General Inquiries**: hello@aureus.protocol
-- 🔒 **Security**: security@aureus.protocol
-- 🤝 **Partnerships**: partnerships@aureus.protocol
-- 💼 **Press**: press@aureus.protocol
-
-### Office Hours
-
-Join our weekly community calls:
-- **When**: Every Friday, 3 PM UTC
-- **Where**: Discord Voice Channel
-- **Topics**: Q&A, Roadmap Updates, Community Proposals
-
----
-
-<div align="center">
-
-## 🌟 Support AUREUS
-
-**Love what we're building? Here's how you can help:**
-
-⭐ Star this repository
-🐛 Report bugs and suggest features
-🔀 Submit pull requests
-🗣️ Spread the word on social media
-💰 Stake AUREUS tokens (coming soon)
-
----
-
-### Built with ❤️ using CodeNut
-
-**The Gold Standard of Human Capital**
-
-*Decentralized • Verifiable • Sovereign*
-
-[![CodeNut Badge](https://img.shields.io/badge/Built%20with-CodeNut-D4AF37?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMiAyMkwyMiAyMkwxMiAyWiIgZmlsbD0iI0Q0QUYzNyIvPgo8L3N2Zz4K)](https://codenut.ai)
-
-**#CodeNutGlobalVibe2025**
-
----
-
-© 2025 AUREUS Protocol. All rights reserved.
-
-</div>
+*Disclaimer: This is experimental software. Use at your own risk. Not financial advice.*

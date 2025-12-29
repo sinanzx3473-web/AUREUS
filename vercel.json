@@ -1,0 +1,48 @@
+{
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "pnpm install",
+  "devCommand": "pnpm run dev",
+  "env": {
+    "VITE_CHAIN": "sepolia"
+  },
+  "build": {
+    "env": {
+      "VITE_CHAIN": "sepolia"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
