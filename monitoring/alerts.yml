@@ -1,0 +1,422 @@
+groups:
+  - name: takumi_alerts
+    interval: 30s
+    rules:
+      # Security Monitoring - Authentication & Authorization
+      - alert: HighAuthenticationFailureRate
+        expr: rate(auth_failures_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High authentication failure rate detected"
+          description: "{{ $value }} authentication failures per second over the last 5 minutes. Possible brute force attack."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-2-jwt-secret-leaked"
+
+      - alert: CriticalAuthenticationFailureRate
+        expr: rate(auth_failures_total[5m]) > 50
+        for: 2m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "CRITICAL: Massive authentication failure spike"
+          description: "{{ $value }} authentication failures per second. Likely active attack."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#phase-2-containment"
+
+      - alert: UnauthorizedAdminAccess
+        expr: increase(admin_auth_failures_total[5m]) > 5
+        for: 1m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "Unauthorized admin access attempts detected"
+          description: "{{ $value }} failed admin authentication attempts in 5 minutes."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-2-jwt-secret-leaked"
+
+      # Security Monitoring - Rate Limiting
+      - alert: RateLimitViolationSpike
+        expr: rate(rate_limit_exceeded_total[5m]) > 20
+        for: 5m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High rate limit violation rate"
+          description: "{{ $value }} rate limit violations per second. Possible abuse or DDoS attempt."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-3-rate-limit-bypass"
+
+      - alert: RateLimitBypassDetected
+        expr: |
+          (
+            rate(http_requests_total[5m]) > 100
+          ) and (
+            rate(rate_limit_exceeded_total[5m]) == 0
+          )
+        for: 10m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "Possible rate limit bypass detected"
+          description: "High request rate ({{ $value }}/s) with no rate limit violations. Rate limiter may be bypassed."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-3-rate-limit-bypass"
+
+      # Security Monitoring - CSRF Protection
+      - alert: CSRFFailureRateHigh
+        expr: rate(csrf_validation_failures_total[5m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High CSRF validation failure rate"
+          description: "{{ $value }} CSRF validation failures per second. Possible CSRF attack or misconfiguration."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-4-csrf-token-validation-failure-spike"
+
+      - alert: CSRFTokenGenerationFailure
+        expr: increase(csrf_token_generation_errors_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "CSRF token generation failing"
+          description: "{{ $value }} CSRF token generation errors. CSRF protection may be broken."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-4-csrf-token-validation-failure-spike"
+
+      # Security Monitoring - Database Security
+      - alert: DatabaseErrorRateHigh
+        expr: rate(database_errors_total[5m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High database error rate"
+          description: "{{ $value }} database errors per second. Possible SQL injection attempt or database issue."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-1-sql-injection-attempt-detected"
+
+      - alert: SuspiciousDatabaseQueries
+        expr: increase(database_query_errors_total{error_type="syntax"}[5m]) > 10
+        for: 2m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "Suspicious database query patterns detected"
+          description: "{{ $value }} SQL syntax errors. Possible SQL injection attack."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-1-sql-injection-attempt-detected"
+
+      # Security Monitoring - Blockchain/Smart Contract
+      - alert: BlockchainIndexerErrors
+        expr: rate(indexer_errors_total[5m]) > 1
+        for: 10m
+        labels:
+          severity: warning
+          category: blockchain
+        annotations:
+          summary: "Blockchain indexer experiencing errors"
+          description: "{{ $value }} indexer errors per second. May miss on-chain events."
+          runbook: "https://github.com/takumi/docs/TROUBLESHOOTING.md#blockchain-indexer-issues"
+
+      - alert: UnexpectedContractEvents
+        expr: rate(contract_events_total{event_type="unknown"}[5m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+          category: blockchain
+        annotations:
+          summary: "Unknown smart contract events detected"
+          description: "Unexpected contract events detected. Possible contract exploit or upgrade."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#scenario-5-smart-contract-exploit"
+
+      # Security Monitoring - Input Validation
+      - alert: InputValidationFailureSpike
+        expr: rate(input_validation_errors_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High input validation failure rate"
+          description: "{{ $value }} input validation errors per second. Possible malicious input or client issue."
+          runbook: "https://github.com/takumi/docs/SECURITY.md#input-validation--sanitization"
+
+      # Security Monitoring - Storage Security
+      - alert: StorageUploadFailureSpike
+        expr: rate(storage_upload_errors_total[5m]) > 2
+        for: 5m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High storage upload failure rate"
+          description: "{{ $value }} storage upload errors per second. Possible malicious file upload attempts."
+          runbook: "https://github.com/takumi/docs/SECURITY.md#storage-security"
+
+      - alert: SuspiciousFileUploads
+        expr: increase(storage_file_validation_failures_total[5m]) > 5
+        for: 2m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "Suspicious file upload attempts detected"
+          description: "{{ $value }} file validation failures. Possible malicious file upload."
+          runbook: "https://github.com/takumi/docs/SECURITY.md#storage-security"
+      # API Health
+      - alert: APIDown
+        expr: up{job="backend-api"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Takumi API is down"
+          description: "The Takumi backend API has been down for more than 2 minutes."
+
+      # High Error Rate
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 5% for the last 5 minutes."
+
+      # Database Connection Issues
+      - alert: DatabaseConnectionFailure
+        expr: up{job="postgres"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database connection failure"
+          description: "Cannot connect to PostgreSQL database."
+
+      # Redis Connection Issues
+      - alert: RedisConnectionFailure
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis connection failure"
+          description: "Cannot connect to Redis cache."
+
+      # High Memory Usage
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is above 90% for the last 5 minutes."
+
+      # High CPU Usage
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is above 80% for the last 5 minutes."
+
+      # Indexer Lag
+      - alert: IndexerLag
+        expr: indexer_block_lag > 100
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Blockchain indexer is lagging"
+          description: "Indexer is more than 100 blocks behind the chain head."
+
+      # Smart Contract Events
+      - alert: NoEventsIndexed
+        expr: rate(indexer_events_total[30m]) == 0
+        for: 30m
+        labels:
+          severity: info
+        annotations:
+          summary: "No events indexed recently"
+          description: "No blockchain events have been indexed in the last 30 minutes."
+
+      # Disk Space
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low disk space"
+          description: "Available disk space is below 10%."
+
+      # Gas Price Anomaly
+      - alert: AnomalousGasSpike
+        expr: indexer_avg_gas_price > (avg_over_time(indexer_avg_gas_price[1h]) * 3)
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Anomalous gas price spike detected"
+          description: "Current gas price is 3x higher than the 1-hour average."
+
+      # Contract Transaction Failures
+      - alert: HighContractFailureRate
+        expr: rate(indexer_contract_tx_failed_total[10m]) / rate(indexer_contract_tx_total[10m]) > 0.1
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High contract transaction failure rate"
+          description: "More than 10% of contract transactions are failing."
+
+      # Rate Limit Exceeded
+      - alert: RateLimitExceeded
+        expr: rate(http_requests_rate_limited_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: info
+        annotations:
+          summary: "High rate limit rejections"
+          description: "More than 10 requests per second are being rate limited."
+
+      # Slow Response Time
+      - alert: SlowAPIResponse
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow API response times"
+          description: "95th percentile response time is above 2 seconds."
+
+      # Contract Event Processing Delay
+      - alert: EventProcessingDelay
+        expr: indexer_event_processing_delay_seconds > 300
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Event processing is delayed"
+          description: "Contract events are being processed with more than 5 minutes delay."
+
+      # Database Query Performance
+      - alert: SlowDatabaseQueries
+        expr: rate(pg_stat_statements_mean_exec_time[5m]) > 1000
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow database queries detected"
+          description: "Average query execution time is above 1 second."
+
+      # IPFS/Arweave Storage Failures
+      - alert: StorageUploadFailures
+        expr: rate(storage_upload_failures_total[10m]) > 0.05
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High storage upload failure rate"
+          description: "More than 5% of IPFS/Arweave uploads are failing."
+
+      # Webhook Delivery Failures
+      - alert: WebhookDeliveryFailures
+        expr: rate(webhook_delivery_failures_total[15m]) > 0.1
+        for: 15m
+        labels:
+          severity: info
+        annotations:
+          summary: "High webhook delivery failure rate"
+          description: "More than 10% of webhook deliveries are failing."
+
+      # JWT Token Validation Failures
+      - alert: HighAuthFailureRate
+        expr: rate(auth_validation_failures_total[5m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High authentication failure rate"
+          description: "More than 5 authentication failures per second detected."
+
+      # Backup Monitoring
+      - alert: BackupFailed
+        expr: backup_last_success_timestamp < (time() - 86400)
+        for: 1h
+        labels:
+          severity: critical
+          category: backup
+        annotations:
+          summary: "Database backup failed"
+          description: "No successful backup in the last 24 hours. Last backup: {{ $value | humanizeDuration }} ago."
+          runbook: "https://github.com/takumi/docs/DISASTER_RECOVERY.md#backup-failure"
+
+      - alert: BackupSizeAnomaly
+        expr: |
+          (
+            backup_size_bytes < (avg_over_time(backup_size_bytes[7d]) * 0.5)
+          ) or (
+            backup_size_bytes > (avg_over_time(backup_size_bytes[7d]) * 2)
+          )
+        for: 30m
+        labels:
+          severity: warning
+          category: backup
+        annotations:
+          summary: "Backup size anomaly detected"
+          description: "Backup size ({{ $value | humanizeBytes }}) is significantly different from 7-day average."
+          runbook: "https://github.com/takumi/docs/DISASTER_RECOVERY.md#backup-verification"
+
+      # Block Reorganization Alerts
+      - alert: BlockReorgDetected
+        expr: increase(block_reorgs_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          category: blockchain
+        annotations:
+          summary: "Blockchain reorganization detected"
+          description: "{{ $value }} block reorg(s) detected on {{ $labels.chain }}. Depth: {{ $labels.depth }} blocks."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#block-reorg-handling"
+
+      - alert: DeepBlockReorg
+        expr: block_reorg_depth > 10
+        for: 1m
+        labels:
+          severity: critical
+          category: blockchain
+        annotations:
+          summary: "Deep blockchain reorganization detected"
+          description: "Deep reorg of {{ $value }} blocks detected on {{ $labels.chain }}. May indicate chain instability or attack."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#deep-reorg-response"
+
+      # Contract Error Rate Monitoring
+      - alert: ContractErrorRateHigh
+        expr: contract_error_rate > 15
+        for: 10m
+        labels:
+          severity: warning
+          category: blockchain
+        annotations:
+          summary: "High contract error rate"
+          description: "Contract {{ $labels.contract }} has {{ $value }}% error rate over last 10 minutes."
+          runbook: "https://github.com/takumi/docs/TROUBLESHOOTING.md#contract-errors"
+
+      - alert: ContractErrorRateCritical
+        expr: contract_error_rate > 30
+        for: 5m
+        labels:
+          severity: critical
+          category: blockchain
+        annotations:
+          summary: "CRITICAL: Very high contract error rate"
+          description: "Contract {{ $labels.contract }} has {{ $value }}% error rate. Possible contract issue or network problem."
+          runbook: "https://github.com/takumi/docs/INCIDENT_RESPONSE.md#contract-failure-spike"

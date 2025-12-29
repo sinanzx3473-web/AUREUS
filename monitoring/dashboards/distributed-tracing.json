@@ -1,0 +1,104 @@
+{
+  "dashboard": {
+    "title": "Distributed Tracing - Takumi Platform",
+    "tags": ["tracing", "jaeger", "performance"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Request Rate by Service",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "sum(rate(traces_spanmetrics_calls_total[5m])) by (service_name)",
+            "legendFormat": "{{service_name}}"
+          }
+        ],
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+      },
+      {
+        "id": 2,
+        "title": "Error Rate by Service",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "sum(rate(traces_spanmetrics_calls_total{status_code=\"STATUS_CODE_ERROR\"}[5m])) by (service_name)",
+            "legendFormat": "{{service_name}}"
+          }
+        ],
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+      },
+      {
+        "id": 3,
+        "title": "P95 Latency by Service",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(traces_spanmetrics_latency_bucket[5m])) by (le, service_name))",
+            "legendFormat": "{{service_name}}"
+          }
+        ],
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 }
+      },
+      {
+        "id": 4,
+        "title": "P99 Latency by Service",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, sum(rate(traces_spanmetrics_latency_bucket[5m])) by (le, service_name))",
+            "legendFormat": "{{service_name}}"
+          }
+        ],
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
+      },
+      {
+        "id": 5,
+        "title": "Contract Interaction Traces",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "sum(rate(traces_spanmetrics_calls_total{span_name=~\"contract.*\"}[5m])) by (span_name)",
+            "legendFormat": "{{span_name}}"
+          }
+        ],
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 }
+      },
+      {
+        "id": 6,
+        "title": "User Workflow Completion Rate",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "sum(rate(traces_spanmetrics_calls_total{span_name=~\"workflow.*\",status_code=\"STATUS_CODE_OK\"}[5m])) by (span_name) / sum(rate(traces_spanmetrics_calls_total{span_name=~\"workflow.*\"}[5m])) by (span_name)",
+            "legendFormat": "{{span_name}}"
+          }
+        ],
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 }
+      },
+      {
+        "id": 7,
+        "title": "Top 10 Slowest Traces (24h)",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "topk(10, traces_spanmetrics_latency_sum / traces_spanmetrics_latency_count)",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "gridPos": { "h": 8, "w": 24, "x": 0, "y": 24 }
+      },
+      {
+        "id": 8,
+        "title": "Trace Search",
+        "type": "jaeger",
+        "datasource": "Jaeger",
+        "gridPos": { "h": 12, "w": 24, "x": 0, "y": 32 }
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 36,
+    "version": 1
+  }
+}
